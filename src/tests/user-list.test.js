@@ -38,22 +38,3 @@ test("user list renders async", async () => {
     const linkElement = screen.getByText(/sarah_conor/i);
     expect(linkElement).toBeInTheDocument();
 });
-
-// test("user list renders mocked", async () => {
-//     const mock = jest.spyOn(axios, "get");
-//     mock.mockImplementation(() =>
-//         Promise.resolve({ data: { users: MOCKED_USERS } })
-//     );
-//     const response = await findAllUsers();
-//     const users = response.users;
-
-//     render(
-//         <HashRouter>
-//             <UserList users={users} />
-//         </HashRouter>
-//     );
-
-//     const user = screen.getByText(/ellen_ripley/i);
-//     expect(user).toBeInTheDocument();
-//     mock.mockRestore();
-// });

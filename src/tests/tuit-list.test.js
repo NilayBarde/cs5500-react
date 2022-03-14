@@ -63,26 +63,3 @@ test("tuit list renders async", async () => {
     const linkElement = screen.getByText(/I am very excited for the summer!/i);
     expect(linkElement).toBeInTheDocument();
 });
-
-// test("tuit list renders mocked", async () => {
-//     const mock = jest.spyOn(axios, "get");
-//     mock.mockImplementation(() =>
-//         Promise.resolve({ data: { tuits: MOCKED_TUITS } })
-//     );
-//     const response = await findAllTuits();
-//     const tuits = response.tuits;
-
-//     render(
-//         <HashRouter>
-//             <Tuits tuits={tuits} />
-//         </HashRouter>
-//     );
-//     const linkElement1 = screen.getByText(/bob's 2nd tuit/i);
-//     expect(linkElement1).toBeInTheDocument();
-//     const linkElement2 = screen.getByText(/alice's 1st tuit/i);
-//     expect(linkElement2).toBeInTheDocument();
-//     const linkElement3 = screen.getByText(/charlie's 1st tuit/i);
-//     expect(linkElement3).toBeInTheDocument();
-
-//     mock.mockRestore();
-// });
