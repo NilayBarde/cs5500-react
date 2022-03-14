@@ -11,10 +11,10 @@ const MOCKED_USERS = [
         _id: "123",
     },
     {
-        username: "alice",
-        password: "alice234",
-        email: "alice@wonderland.com",
-        _id: "622cff009f29f1dd5a0ccead",
+        username: "sarah_conor",
+        password: "illbeback",
+        email: "sarah@bigjeff.com",
+        _id: "234",
     },
 ];
 
