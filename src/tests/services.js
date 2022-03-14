@@ -3,6 +3,7 @@ const BASE_URL = "https://a2-cs5500.herokuapp.com/api";
 
 const LOGIN_API = `${BASE_URL}/login`;
 const USERS_API = `${BASE_URL}/users`;
+const TUITS_API = "${BASE_URL}/tuits";
 
 export const createUser = (user) =>
     axios.post(`${USERS_API}`, user).then((response) => response.data);
