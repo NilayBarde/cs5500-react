@@ -4,7 +4,7 @@ import WhatsHappening from "../whats-happening";
 import {BrowserRouter, Routes, Route, HashRouter} from "react-router-dom";
 import Home from "../home";
 import Bookmarks from "../bookmarks";
-import Profile from "../profile";
+import {Profile} from "../profile";
 import './tuiter.css'
 import EditProfile from "../profile/edit-profile";
 import Explore from "../explore";
@@ -13,7 +13,7 @@ import Messages from "../messages";
 import Lists from "../lists";
 import More from "../more";
 import {Login} from "../profile/login";
-import Signup from "../profile/signup";
+import {Signup} from "../profile/signup";
 import TuitScreen from "../tuits/tuit-screen";
 
 function Tuiter () {

@@ -1,10 +1,7 @@
 import axios from "axios";
 
-// const BASE_URL = "https://cs5500-01-sp22.herokuapp.com";
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-
-const TUITS_API = `${BASE_URL}/api/tuits`;
-const USERS_API = `${BASE_URL}/api/users`;
+const TUITS_API = process.env.REACT_APP_BASE_URL + "/tuits";
+const USERS_API = process.env.REACT_APP_BASE_URL + "/users";
 
 const api = axios.create({
     withCredentials: true
@@ -18,13 +15,14 @@ export const findTuitById = (tid) =>
     api.get(`${TUITS_API}/${tid}`)
         .then(response => response.data);
 
-export const findTuitByUser = (uid) =>
+export const findAllTuitsByUser = (uid) =>
     api.get(`${USERS_API}/${uid}/tuits`)
         .then(response => response.data);
 
-export const createTuit = (uid, tuit) =>
-    api.post(`${USERS_API}/${uid}/tuits`, tuit)
+export const createTuitByUser = (uid, tuit) => {
+    return api.post(`${USERS_API}/${uid}/tuits`, tuit)
         .then(response => response.data);
+}
 
 export const updateTuit = (tid, tuit) =>
     api.post(`${TUITS_API}/${tid}`, tuit)
