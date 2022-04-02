@@ -1,25 +1,18 @@
-import {forwardRef, useEffect, useImperativeHandle, useState} from "react";
+import {useEffect, useState} from "react";
 import * as service from "../../services/tuits-service";
-import {Tuits} from "../tuits";
+import Tuits from "../tuits";
 
-export const MyTuits = forwardRef((props, ref) => {
-    const [tuits, setTuits] = useState([]);
-    const findMyTuits = () =>
-        service.findAllTuitsByUser("session")
-            .then(tuits => setTuits(tuits));
+const MyTuits = () => {
+  const [tuits, setTuits] = useState([]);
+  const findMyTuits = () => {
+    service.findTuitByUser("me").then(tuits => setTuits(tuits))
+  };
+  useEffect(findMyTuits, []);
+  const deleteTuit = (tid) => service.deleteTuit(tid).then(findMyTuits);
 
-    useEffect(findMyTuits, []);
+  return(
+    <Tuits tuits={tuits} deleteTuit={deleteTuit} refreshTuits={findMyTuits}/>
+  );
+};
 
-    useImperativeHandle(ref, () => ({
-        refresh() {
-            console.log('Refreshing!')
-            findMyTuits()
-        }
-    }));
-
-    return(
-        <Tuits tuits={tuits}
-               refreshTuits={findMyTuits}
-        />
-    );
-});
+export default MyTuits;

@@ -1,32 +1,43 @@
-import {useState} from "react";
+import { useState } from "react";
 import * as service from "../../services/auth-service";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export const Signup = () => {
+const Signup = () => {
     const [newUser, setNewUser] = useState({});
     const navigate = useNavigate();
     const signup = () =>
-        service.signup(newUser)
-            .then(() => navigate('/home'))
-            .catch(e => alert(e));
+        service
+            .signup(newUser)
+            .then(() => navigate("/profile"))
+            .catch((e) => alert(e));
     return (
         <div>
             <h1>Signup</h1>
-            <input className="mb-2 form-control"
-                   onChange={(e) =>
-                       setNewUser({...newUser, username: e.target.value})}
-                   placeholder="username"/>
-            <input className="mb-2 form-control"
-                   onChange={(e) =>
-                       setNewUser({...newUser, password: e.target.value})}
-                   placeholder="password" type="password"/>
-            <input className="mb-2 form-control"
-                   onChange={(e) =>
-                       setNewUser({...newUser, email: e.target.value})}
-                   placeholder="email" type="email"/>
-            <button onClick={signup}
-                    className="btn btn-primary mb-5">Signup
-            </button>
+            <input
+                onChange={(e) =>
+                    setNewUser({ ...newUser, username: e.target.value })
+                }
+                placeholder="Username"
+                className="mb-2 form-control"
+            />
+            <input
+                onChange={(e) =>
+                    setNewUser({ ...newUser, password: e.target.value })
+                }
+                type="password"
+                placeholder="Password"
+                className="mb-2 form-control"
+            />
+            <input
+                onChange={(e) =>
+                    setNewUser({ ...newUser, email: e.target.value })
+                }
+                type="email"
+                placeholder="Email"
+                className="mb-2 form-control"
+            />
+            <button onClick={signup}>Signup</button>
         </div>
     );
-}
+};
+export default Signup;

@@ -1,18 +1,8 @@
-import {Tuits} from "../tuits";
-import * as service from "../../services/likes-service";
-import {useEffect, useState} from "react";
-
 const MyLikes = () => {
-    const [likedTuits, setLikedTuis] = useState([]);
-    const findTuitsILike = () =>
-        service.findAllTuitsLikedByUser("me")
-            .then((tuits) => setLikedTuis(tuits));
-    useEffect(findTuitsILike, []);
-    
     return(
-        <div>
-            <Tuits tuits={likedTuits} refreshTuits={findTuitsILike}/>
-        </div>
+      <div>
+        <h1>My Likes</h1>
+      </div>
     );
-};
-export default MyLikes;
+  };
+  export default MyLikes;
