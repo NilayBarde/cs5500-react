@@ -2,6 +2,7 @@ import { Tuits } from "../components/tuits";
 import { screen, render } from "@testing-library/react";
 import { HashRouter } from "react-router-dom";
 import { findAllTuits } from "../services/tuits-service";
+import axios from "axios";
 
 const MOCKED_USERS = [
     {
@@ -42,24 +43,25 @@ const MOCKED_TUITS = [
     },
 ];
 
-test("tuit list renders static tuit array", () => {
-    render(
-        <HashRouter>
-            <Tuits tuits={MOCKED_TUITS} />
-        </HashRouter>
+test("tuit list renders mocked", async () => {
+    const mock = jest.spyOn(axios, "get");
+    mock.mockImplementation(() =>
+        Promise.resolve({ data: { tuits: MOCKED_TUITS } })
     );
-    const linkElement = screen.getByText(/alice's 1st tuit/i);
-    expect(linkElement).toBeInTheDocument();
-});
+    const response = await findAllTuits();
+    const tuits = response.tuits;
 
-test("tuit list renders async", async () => {
-    // TODO: implement this
-    const tuits = await findAllTuits();
     render(
         <HashRouter>
             <Tuits tuits={tuits} />
         </HashRouter>
     );
-    const linkElement = screen.getByText(/I am very excited for the summer!/i);
-    expect(linkElement).toBeInTheDocument();
+    const linkElement1 = screen.getByText(/bob's 2nd tuit/i);
+    expect(linkElement1).toBeInTheDocument();
+    const linkElement2 = screen.getByText(/alice's 1st tuit/i);
+    expect(linkElement2).toBeInTheDocument();
+    const linkElement3 = screen.getByText(/charlie's 1st tuit/i);
+    expect(linkElement3).toBeInTheDocument();
+
+    mock.mockRestore();
 });

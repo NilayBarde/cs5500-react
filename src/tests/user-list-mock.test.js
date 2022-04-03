@@ -2,6 +2,7 @@ import { UserList } from "../components/profile/user-list";
 import { screen, render } from "@testing-library/react";
 import { HashRouter } from "react-router-dom";
 import { findAllUsers } from "../services/users-service";
+import axios from "axios";
 
 const MOCKED_USERS = [
     {
@@ -18,23 +19,21 @@ const MOCKED_USERS = [
     },
 ];
 
-test("user list renders static user array", () => {
-    render(
-        <HashRouter>
-            <UserList users={MOCKED_USERS} />
-        </HashRouter>
+test("user list renders mocked", async () => {
+    const mock = jest.spyOn(axios, "get");
+    mock.mockImplementation(() =>
+        Promise.resolve({ data: { users: MOCKED_USERS } })
     );
-    const linkElement = screen.getByText(/ellen_ripley/i);
-    expect(linkElement).toBeInTheDocument();
-});
+    const response = await findAllUsers();
+    const users = response.users;
 
-test("user list renders async", async () => {
-    const users = await findAllUsers();
     render(
         <HashRouter>
             <UserList users={users} />
         </HashRouter>
     );
-    const linkElement = screen.getByText(/sarah_conor/i);
-    expect(linkElement).toBeInTheDocument();
+
+    const user = screen.getByText(/ellen_ripley/i);
+    expect(user).toBeInTheDocument();
+    mock.mockRestore();
 });
