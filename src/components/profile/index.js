@@ -2,8 +2,6 @@ import React, {useEffect, useState} from "react";
 import {useNavigate, Route, Routes, Link} from "react-router-dom";
 import * as service from "../../services/auth-service";
 import MyTuits from "./my-tuits";
-import TuitsAndReplies from "./tuits-and-replies";
-import Media from "./media";
 import MyLikes from "./my-likes";
 import MyDislikes from "./my-dislikes";
 
